@@ -6,7 +6,7 @@ import typing
 import pydantic
 
 from ....core.datetime_utils import serialize_datetime
-from .observation_level_span import ObservationLevelSpan
+from ...commons.types.observation_level import ObservationLevel
 
 
 class UpdateSpanRequest(pydantic.BaseModel):
@@ -15,7 +15,7 @@ class UpdateSpanRequest(pydantic.BaseModel):
     metadata: typing.Optional[typing.Any]
     input: typing.Optional[typing.Any]
     output: typing.Optional[typing.Any]
-    level: typing.Optional[ObservationLevelSpan]
+    level: typing.Optional[ObservationLevel]
     status_message: typing.Optional[str] = pydantic.Field(alias="statusMessage")
 
     def json(self, **kwargs: typing.Any) -> str:
