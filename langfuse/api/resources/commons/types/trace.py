@@ -14,7 +14,6 @@ except ImportError:
 class Trace(pydantic.BaseModel):
     id: str = pydantic.Field(description="The unique identifier of a trace")
     timestamp: dt.datetime
-    external_id: typing.Optional[str] = pydantic.Field(alias="externalId")
     name: typing.Optional[str]
     release: typing.Optional[str]
     version: typing.Optional[str]
