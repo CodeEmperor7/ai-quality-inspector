@@ -16,6 +16,9 @@ class CreateTraceRequest(pydantic.BaseModel):
     name: typing.Optional[str] = None
     user_id: typing.Optional[str] = pydantic.Field(alias="userId", default=None)
     external_id: typing.Optional[str] = pydantic.Field(alias="externalId", default=None)
+    input: typing.Optional[typing.Any] = None
+    output: typing.Optional[typing.Any] = None
+    session_id: typing.Optional[str] = pydantic.Field(alias="sessionId", default=None)
     release: typing.Optional[str] = None
     version: typing.Optional[str] = None
     metadata: typing.Optional[typing.Any] = None
