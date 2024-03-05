@@ -8,8 +8,19 @@ from .observations_view import ObservationsView
 from .score import Score
 from .trace import Trace
 
+try:
+    import pydantic.v1 as pydantic  # type: ignore
+except ImportError:
+    import pydantic  # type: ignore
+
 
 class TraceWithFullDetails(Trace):
+    html_path: str = pydantic.Field(
+        alias="htmlPath", description="Path of trace in Langfuse UI"
+    )
+    total_cost: float = pydantic.Field(
+        alias="totalCost", description="Cost of trace in USD"
+    )
     observations: typing.List[ObservationsView]
     scores: typing.List[Score]
 

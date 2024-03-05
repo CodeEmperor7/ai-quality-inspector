@@ -24,6 +24,9 @@ class ProjectsClient:
         self._client_wrapper = client_wrapper
 
     def get(self) -> Projects:
+        """
+        Get Project associated with API key
+        """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
             urllib.parse.urljoin(
@@ -58,6 +61,9 @@ class AsyncProjectsClient:
         self._client_wrapper = client_wrapper
 
     async def get(self) -> Projects:
+        """
+        Get Project associated with API key
+        """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
             urllib.parse.urljoin(
