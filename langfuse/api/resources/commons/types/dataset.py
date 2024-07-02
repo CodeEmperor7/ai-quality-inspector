@@ -5,17 +5,16 @@ import typing
 
 from ....core.datetime_utils import serialize_datetime
 from ....core.pydantic_utilities import pydantic_v1
-from .dataset_core import DatasetCore
-from .dataset_item import DatasetItem
 
 
-class Dataset(DatasetCore):
-    """
-    Dataset including all items
-    """
-
-    items: typing.List[DatasetItem]
-    runs: typing.List[str]
+class Dataset(pydantic_v1.BaseModel):
+    id: str
+    name: str
+    description: typing.Optional[str] = None
+    metadata: typing.Optional[typing.Any] = None
+    project_id: str = pydantic_v1.Field(alias="projectId")
+    created_at: dt.datetime = pydantic_v1.Field(alias="createdAt")
+    updated_at: dt.datetime = pydantic_v1.Field(alias="updatedAt")
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {
