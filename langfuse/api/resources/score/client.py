@@ -18,6 +18,7 @@ from ..commons.errors.method_not_allowed_error import MethodNotAllowedError
 from ..commons.errors.not_found_error import NotFoundError
 from ..commons.errors.unauthorized_error import UnauthorizedError
 from ..commons.types.score import Score
+from ..commons.types.score_data_type import ScoreDataType
 from ..commons.types.score_source import ScoreSource
 from .types.create_score_request import CreateScoreRequest
 from .types.scores import Scores
@@ -57,12 +58,9 @@ class ScoreClient:
         )
         client.score.create(
             request=CreateScoreRequest(
-                id="string",
-                trace_id="string",
-                name="string",
-                value=1.1,
-                observation_id="string",
-                comment="string",
+                name="novelty",
+                value=0.9,
+                trace_id="cdef-1234-5678-90ab",
             ),
         )
         """
@@ -146,6 +144,8 @@ class ScoreClient:
         operator: typing.Optional[str] = None,
         value: typing.Optional[float] = None,
         score_ids: typing.Optional[str] = None,
+        config_id: typing.Optional[str] = None,
+        data_type: typing.Optional[ScoreDataType] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Scores:
         """
@@ -156,9 +156,9 @@ class ScoreClient:
 
             - limit: typing.Optional[int]. Limit of items per page. If you encounter api issues due to too large page sizes, try to reduce the limit.
 
-            - user_id: typing.Optional[str].
+            - user_id: typing.Optional[str]. Retrieve only scores with this userId associated to the trace.
 
-            - name: typing.Optional[str].
+            - name: typing.Optional[str]. Retrieve only scores with this name.
 
             - from_timestamp: typing.Optional[dt.datetime]. Retrieve only scores newer than this datetime (ISO 8601).
 
@@ -170,11 +170,15 @@ class ScoreClient:
 
             - score_ids: typing.Optional[str]. Comma-separated list of score IDs to limit the results to.
 
+            - config_id: typing.Optional[str]. Retrieve only scores with a specific configId.
+
+            - data_type: typing.Optional[ScoreDataType]. Retrieve only scores with a specific dataType.
+
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
         import datetime
 
-        from finto import ScoreSource
+        from finto import ScoreDataType, ScoreSource
         from finto.client import FernLangfuse
 
         client = FernLangfuse(
@@ -197,6 +201,8 @@ class ScoreClient:
             operator="string",
             value=1.1,
             score_ids="string",
+            config_id="string",
+            data_type=ScoreDataType.NUMERIC,
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -218,6 +224,8 @@ class ScoreClient:
                         "operator": operator,
                         "value": value,
                         "scoreIds": score_ids,
+                        "configId": config_id,
+                        "dataType": data_type,
                         **(
                             request_options.get("additional_query_parameters", {})
                             if request_options is not None
@@ -465,12 +473,9 @@ class AsyncScoreClient:
         )
         await client.score.create(
             request=CreateScoreRequest(
-                id="string",
-                trace_id="string",
-                name="string",
-                value=1.1,
-                observation_id="string",
-                comment="string",
+                name="novelty",
+                value=0.9,
+                trace_id="cdef-1234-5678-90ab",
             ),
         )
         """
@@ -554,6 +559,8 @@ class AsyncScoreClient:
         operator: typing.Optional[str] = None,
         value: typing.Optional[float] = None,
         score_ids: typing.Optional[str] = None,
+        config_id: typing.Optional[str] = None,
+        data_type: typing.Optional[ScoreDataType] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Scores:
         """
@@ -564,9 +571,9 @@ class AsyncScoreClient:
 
             - limit: typing.Optional[int]. Limit of items per page. If you encounter api issues due to too large page sizes, try to reduce the limit.
 
-            - user_id: typing.Optional[str].
+            - user_id: typing.Optional[str]. Retrieve only scores with this userId associated to the trace.
 
-            - name: typing.Optional[str].
+            - name: typing.Optional[str]. Retrieve only scores with this name.
 
             - from_timestamp: typing.Optional[dt.datetime]. Retrieve only scores newer than this datetime (ISO 8601).
 
@@ -578,11 +585,15 @@ class AsyncScoreClient:
 
             - score_ids: typing.Optional[str]. Comma-separated list of score IDs to limit the results to.
 
+            - config_id: typing.Optional[str]. Retrieve only scores with a specific configId.
+
+            - data_type: typing.Optional[ScoreDataType]. Retrieve only scores with a specific dataType.
+
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
         import datetime
 
-        from finto import ScoreSource
+        from finto import ScoreDataType, ScoreSource
         from finto.client import AsyncFernLangfuse
 
         client = AsyncFernLangfuse(
@@ -605,6 +616,8 @@ class AsyncScoreClient:
             operator="string",
             value=1.1,
             score_ids="string",
+            config_id="string",
+            data_type=ScoreDataType.NUMERIC,
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -626,6 +639,8 @@ class AsyncScoreClient:
                         "operator": operator,
                         "value": value,
                         "scoreIds": score_ids,
+                        "configId": config_id,
+                        "dataType": data_type,
                         **(
                             request_options.get("additional_query_parameters", {})
                             if request_options is not None

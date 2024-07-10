@@ -21,13 +21,31 @@ class ScoreConfig(pydantic_v1.BaseModel):
     project_id: str = pydantic_v1.Field(alias="projectId")
     data_type: ScoreDataType = pydantic_v1.Field(alias="dataType")
     is_archived: bool = pydantic_v1.Field(alias="isArchived")
+    """
+    Whether the score config is archived. Defaults to false
+    """
+
     min_value: typing.Optional[float] = pydantic_v1.Field(
         alias="minValue", default=None
     )
+    """
+    Sets minimum value for numerical scores. If not set, the minimum value defaults to -∞
+    """
+
     max_value: typing.Optional[float] = pydantic_v1.Field(
         alias="maxValue", default=None
     )
-    categories: typing.Optional[typing.List[ConfigCategory]] = None
+    """
+    Sets maximum value for numerical scores. If not set, the maximum value defaults to +∞
+    """
+
+    categories: typing.Optional[typing.List[ConfigCategory]] = pydantic_v1.Field(
+        default=None
+    )
+    """
+    Configures custom categories for categorical scores
+    """
+
     description: typing.Optional[str] = None
 
     def json(self, **kwargs: typing.Any) -> str:
