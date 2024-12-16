@@ -8,6 +8,7 @@ from ....core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
 from ...commons.types.map_value import MapValue
 from .ingestion_usage import IngestionUsage
 from .update_span_body import UpdateSpanBody
+from .usage_details import UsageDetails
 
 
 class UpdateGenerationBody(UpdateSpanBody):
@@ -21,6 +22,12 @@ class UpdateGenerationBody(UpdateSpanBody):
     usage: typing.Optional[IngestionUsage] = None
     prompt_name: typing.Optional[str] = pydantic_v1.Field(
         alias="promptName", default=None
+    )
+    usage_details: typing.Optional[UsageDetails] = pydantic_v1.Field(
+        alias="usageDetails", default=None
+    )
+    cost_details: typing.Optional[typing.Dict[str, float]] = pydantic_v1.Field(
+        alias="costDetails", default=None
     )
     prompt_version: typing.Optional[int] = pydantic_v1.Field(
         alias="promptVersion", default=None
