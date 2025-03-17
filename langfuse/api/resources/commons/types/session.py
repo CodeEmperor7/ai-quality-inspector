@@ -11,6 +11,10 @@ class Session(pydantic_v1.BaseModel):
     id: str
     created_at: dt.datetime = pydantic_v1.Field(alias="createdAt")
     project_id: str = pydantic_v1.Field(alias="projectId")
+    environment: typing.Optional[str] = pydantic_v1.Field(default=None)
+    """
+    The environment from which this session originated.
+    """
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {
