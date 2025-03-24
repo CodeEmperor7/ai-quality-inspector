@@ -15,8 +15,10 @@ class OpenAiResponseUsageSchema(pydantic_v1.BaseModel):
     input_tokens: int
     output_tokens: int
     total_tokens: int
-    input_tokens_details: typing.Optional[typing.Dict[str, int]] = None
-    output_tokens_details: typing.Optional[typing.Dict[str, int]] = None
+    input_tokens_details: typing.Optional[typing.Dict[str, typing.Optional[int]]] = None
+    output_tokens_details: typing.Optional[typing.Dict[str, typing.Optional[int]]] = (
+        None
+    )
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {
